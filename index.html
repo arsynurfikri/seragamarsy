@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<!-- JAGOAN SERAGAM PROJECT - landing page dummy. Semua data bertanda EDIT bisa diganti. -->
+<!-- Cara edit cepat: cari kata EDIT di file ini, ganti teks/angka/link di sekitarnya. -->
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jagoan Seragam Project - Konveksi Seragam Bandung</title>
+<meta name="description" content="Jagoan Seragam Project memproduksi kaos, polo, jaket, dan seragam kerja untuk sekolah, kantor, dan komunitas di Bandung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff;
+    --wash:#f4f4f1;
+    --ink:#1b1a17;
+    --muted:#5d5b55;
+    --line:#e3e1da;
+    --accent:#e4572e;
+    --accent-deep:#b23a14;
+    --accent-wash:#fceee5;
+    --radius:0; /* shape lock: all-sharp, industrial */
+    --max:1200px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+    background:var(--paper);color:var(--ink);
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--accent-deep);
+  }
+  h1,h2{line-height:1.02;letter-spacing:-.03em;font-weight:900;text-wrap:balance}
+  h2{font-size:clamp(1.9rem,3.6vw,2.9rem);margin:14px 0 12px}
+  .lede{color:var(--muted);font-size:1.05rem;max-width:60ch}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:900;letter-spacing:-.02em}
+  .brand-mark{
+    width:34px;height:34px;background:var(--ink);color:#fff;display:grid;place-items:center;
+    font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px;
+  }
+  .brand-mark span{color:var(--accent)}
+  nav.links{display:flex;gap:26px}
+  nav.links a{text-decoration:none;font-size:.92rem;font-weight:600;color:var(--muted)}
+  nav.links a:hover{color:var(--ink)}
+  .btn{
+    display:inline-block;text-decoration:none;font-weight:700;font-size:.95rem;
+    padding:14px 26px;border:1.5px solid var(--ink);background:var(--ink);color:#fff;
+    transition:transform .12s ease,background .15s ease;white-space:nowrap;
+  }
+  .btn:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+  .btn:active{transform:scale(.98)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:#fff}
+  .btn.small{padding:10px 18px;font-size:.85rem}
+  .nav-toggle{display:none;background:none;border:1.5px solid var(--ink);padding:8px 12px;font-weight:700;cursor:pointer}
+
+  /* ---------- hero ---------- */
+  .hero{border-bottom:1px solid var(--line)}
+  .hero-grid{
+    display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center;
+    min-height:calc(100dvh - 69px);padding-top:48px;padding-bottom:56px;
+  }
+  .hero h1{font-size:clamp(2.7rem,5.4vw,4.7rem);margin:18px 0 16px}
+  .hero h1 em{font-style:italic;color:var(--accent-deep)}
+  .hero p.sub{color:var(--muted);font-size:1.1rem;max-width:38ch;margin-bottom:28px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-photo{position:relative}
+  .hero-photo img{width:100%;height:520px;object-fit:cover;background:var(--wash)}
+  .hero-photo::after{
+    content:"";position:absolute;inset:0;border:1.5px solid var(--ink);
+    transform:translate(14px,14px);pointer-events:none;
+  }
+  .hero-ticket{
+    position:absolute;left:-26px;bottom:34px;background:var(--ink);color:#fff;
+    padding:14px 18px;font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.7;
+  }
+  .hero-ticket b{color:var(--accent)}
+
+  /* ---------- marquee (satu-satunya) ---------- */
+  .tape{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;padding:13px 0}
+  .tape-track{display:inline-block;animation:tape 26s linear infinite;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.14em}
+  .tape-track b{color:var(--accent);font-weight:600}
+  @keyframes tape{to{transform:translateX(-50%)}}
+
+  /* ---------- stats ---------- */
+  .stats{background:var(--accent-wash);border-bottom:1px solid var(--line)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:44px 24px}
+  .stat b{display:block;font-family:"IBM Plex Mono",monospace;font-size:clamp(1.9rem,3vw,2.6rem);font-weight:600;letter-spacing:-.02em}
+  .stat b i{font-style:normal;color:var(--accent-deep)}
+  .stat span{font-size:.9rem;color:var(--muted)}
+
+  /* ---------- sections ---------- */
+  section.block{padding:96px 0}
+  section.block.tint{background:var(--wash)}
+
+  /* layanan: bento 4 sel */
+  .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:44px}
+  .cell{border:1.5px solid var(--ink);background:#fff;padding:30px;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+  .cell h3{font-size:1.45rem;letter-spacing:-.02em;margin:10px 0 6px}
+  .cell p{color:var(--muted);font-size:.95rem;max-width:34ch}
+  .cell .num{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.2em;color:var(--accent-deep)}
+  .cell.photo{padding:0;justify-content:flex-end}
+  .cell.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .cell.photo .cap{position:relative;background:var(--paper);border-top:1.5px solid var(--ink);padding:16px 20px}
+  .cell.photo .cap h3{margin:2px 0}
+  .cell.dark{background:var(--ink);color:#fff}
+  .cell.dark p{color:#cfccc4}
+  .cell.dark .num{color:var(--accent)}
+  .cell.accent{background:var(--accent);border-color:var(--accent-deep);color:#fff}
+  .cell.accent p{color:#ffe4d6}
+  .cell.accent .num{color:#fff}
+  .span7{grid-column:span 7}.span5{grid-column:span 5}
+
+  /* cara pesan: lajur angka */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px}
+  .step .n{font-family:"IBM Plex Mono",monospace;font-size:2rem;font-weight:600;color:var(--accent-deep)}
+  .step h3{font-size:1.1rem;margin:8px 0 6px}
+  .step p{color:var(--muted);font-size:.93rem}
+
+  /* harga */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;align-items:stretch}
+  .tier{border:1.5px solid var(--ink);padding:34px 30px;background:#fff;display:flex;flex-direction:column}
+  .tier .t{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.2em;color:var(--accent-deep)}
+  .tier .price{font-size:2.5rem;font-weight:900;letter-spacing:-.03em;margin:10px 0 2px}
+  .tier .per{color:var(--muted);font-size:.88rem;margin-bottom:20px}
+  .tier ul{list-style:none;margin-bottom:28px;display:grid;gap:10px;font-size:.94rem}
+  .tier ul li::before{content:"✓ ";color:var(--accent-deep);font-weight:700}
+  .tier .btn{margin-top:auto;text-align:center}
+  .tier.hot{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tier.hot .t{color:var(--accent)}
+  .tier.hot .per{color:#cfccc4}
+  .tier.hot ul li::before{color:var(--accent)}
+
+  /* portofolio */
+  .works{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:44px}
+  .works figure{margin:0}
+  .works img{width:100%;object-fit:cover;background:var(--wash);border:1.5px solid var(--ink)}
+  .works figcaption{font-size:.85rem;color:var(--muted);padding-top:8px}
+  .w1{grid-column:span 7}.w1 img{height:380px}
+  .w2{grid-column:span 5}.w2 img{height:380px}
+  .w3{grid-column:span 4}.w3 img{height:300px}
+  .w4{grid-column:span 4}.w4 img{height:300px}
+  .w5{grid-column:span 4}.w5 img{height:300px}
+
+  /* testimoni */
+  .quotes{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:44px}
+  blockquote{border-left:4px solid var(--accent);padding-left:24px}
+  blockquote p{font-size:1.25rem;font-weight:600;letter-spacing:-.015em;line-height:1.4}
+  blockquote cite{display:block;margin-top:12px;font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--muted)}
+
+  /* faq */
+  .faq{margin-top:36px;max-width:760px}
+  .faq details{border:1.5px solid var(--ink);margin-bottom:12px;background:#fff}
+  .faq summary{cursor:pointer;padding:18px 22px;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::after{content:"+";color:var(--accent-deep);font-weight:900}
+  .faq details[open] summary::after{content:"-"}
+  .faq details p{padding:0 22px 20px;color:var(--muted);font-size:.95rem}
+
+  /* kontak */
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;margin-top:44px;align-items:start}
+  .contact-list{list-style:none;display:grid;gap:18px;margin-top:24px}
+  .contact-list li{border:1.5px solid var(--ink);padding:16px 20px;background:#fff}
+  .contact-list .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;color:var(--accent-deep);display:block;margin-bottom:4px}
+  .contact-list a{font-weight:700;text-decoration:none}
+  form.order{border:1.5px solid var(--ink);background:#fff;padding:34px;display:grid;gap:18px}
+  .field{display:grid;gap:8px}
+  .field label{font-weight:700;font-size:.9rem}
+  .field .hint{font-size:.82rem;color:var(--muted)}
+  .field input,.field select,.field textarea{
+    font:inherit;padding:13px 14px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);width:100%;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--accent);outline-offset:1px}
+  .field input::placeholder,.field textarea::placeholder{color:#8a887f}
+
+  footer{background:var(--ink);color:#fff;padding:64px 0 32px}
+  .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px}
+  footer p,footer li{color:#cfccc4;font-size:.92rem}
+  footer ul{list-style:none;display:grid;gap:8px;margin-top:14px}
+  footer a{text-decoration:none}
+  footer a:hover{color:var(--accent)}
+  .foot-brand{font-weight:900;font-size:1.3rem;letter-spacing:-.02em}
+  .foot-brand span{color:var(--accent)}
+  .foot-base{border-top:1px solid #3a382f;margin-top:48px;padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:#8f8c83}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:960px){
+    nav.links{display:none}
+    nav.links.open{display:flex;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;padding:20px 24px;border-bottom:1px solid var(--line);gap:16px}
+    .nav-cta{display:none}
+    .nav-toggle{display:block}
+    .hero-grid{grid-template-columns:1fr;min-height:0;padding-top:40px;gap:36px}
+    .hero-photo img{height:340px}
+    .hero-ticket{left:12px}
+    .stats-grid{grid-template-columns:1fr 1fr}
+    .span7,.span5{grid-column:span 12}
+    .steps{grid-template-columns:1fr 1fr}
+    .tiers{grid-template-columns:1fr}
+    .w1,.w2,.w3,.w4,.w5{grid-column:span 12}
+    .w1 img,.w2 img{height:300px}
+    .quotes{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    section.block{padding:64px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .tape-track{animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#atas"><span class="brand-mark">J<span>S</span></span> Jagoan Seragam</a>
+    <nav class="links" id="navLinks" aria-label="Navigasi utama">
+      <a href="#layanan">Layanan</a>
+      <a href="#harga">Harga</a>
+      <a href="#portofolio">Portofolio</a>
+      <a href="#testimoni">Testimoni</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+    <a class="btn small nav-cta" href="https://wa.me/6281234567890?text=Halo%20Jagoan%20Seragam%2C%20saya%20mau%20pesan%20seragam." target="_blank" rel="noopener">Pesan via WhatsApp</a>
+    <!-- EDIT: ganti 6281234567890 dengan nomor WhatsApp usaha -->
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">MENU</button>
+  </div>
+</header>
+
+<main id="atas">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Konveksi Bandung, sejak 2019</p>
+        <h1>Seragam rapi, <em>tepat waktu,</em> tanpa drama.</h1>
+        <p class="sub">Jagoan Seragam Project memproduksi kaos, polo, jaket, dan seragam kerja untuk sekolah, kantor, dan komunitas.</p>
+        <div class="cta-row">
+          <a class="btn" href="https://wa.me/6281234567890?text=Halo%20Jagoan%20Seragam%2C%20saya%20mau%20pesan%20seragam." target="_blank" rel="noopener">Pesan via WhatsApp</a>
+          <a class="btn ghost" href="#harga">Lihat Paket Harga</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="hero.JPG" alt="Pasangan pengantin berbusana adat Jawa, contoh hasil jahitan Jagoan Seragam Project" width="4608" height="3072" fetchpriority="high" style="object-position:right center">
+        <div class="hero-ticket">RATA-RATA PRODUKSI <b>7 HARI</b><br>MIN. ORDER <b>12 PCS</b></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAPE -->
+  <div class="tape" aria-hidden="true">
+    <div class="tape-track" id="tapeTrack">
+      <span>KAOS <b>•</b> POLO <b>•</b> JAKET <b>•</b> HOODIE <b>•</b> SERAGAM KERJA <b>•</b> SERAGAM SEKOLAH <b>•</b> BORDIR <b>•</b> SABLON&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat reveal"><b><span data-count="850">0</span><i>+</i></b><span>pesanan selesai</span></div>
+      <div class="stat reveal"><b><span data-count="120">0</span><i>+</i></b><span>sekolah, kantor, dan komunitas</span></div>
+      <div class="stat reveal"><b><span data-count="7">0</span> <i>hari</i></b><span>rata-rata waktu produksi</span></div>
+      <div class="stat reveal"><b>4<i>,</i>9<span style="font-size:1.2rem">/5</span></b><span>rating pembeli (dummy)</span></div>
+    </div>
+  </div>
+  <!-- EDIT: angka statistik di atas dummy, sesuaikan dengan data asli -->
+
+  <!-- LAYANAN -->
+  <section class="block" id="layanan">
+    <div class="wrap">
+      <h2 class="reveal">Satu workshop untuk semua kebutuhan seragam.</h2>
+      <p class="lede reveal">Pilih bahan, tentukan desain, kami jahit sampai rapi. Semua paket sudah termasuk gratis desain dan revisi.</p>
+      <div class="bento">
+        <article class="cell photo span7 reveal">
+          <img src="https://picsum.photos/seed/jagoan-kaos/1200/800" alt="Contoh kaos dan polo hasil produksi" width="1200" height="800" loading="lazy">
+          <div class="cap"><span class="num">01</span><h3>Kaos dan Polo</h3><p>Cotton combed 24s sampai 30s, sablon DTF atau bordir komputer.</p></div>
+        </article>
+        <article class="cell dark span5 reveal">
+          <span class="num">02</span><h3>Jaket dan Hoodie</h3><p>Fleece cotton dan parasut, cocok untuk angkatan, komunitas, dan touring.</p>
+        </article>
+        <article class="cell accent span5 reveal">
+          <span class="num">03</span><h3>Seragam Kerja</h3><p>Kemeja lapangan, wearpack, dan rompi proyek denganjahitan rantai yang kuat.</p>
+        </article>
+        <article class="cell photo span7 reveal">
+          <img src="https://picsum.photos/seed/jagoan-bordir/1200/800" alt="Detail bordir komputer pada seragam" width="1200" height="800" loading="lazy">
+          <div class="cap"><span class="num">04</span><h3>Bordir dan Sablon Satuan</h3><p>Logo perusahaan, nama regu, dan patch, dikerjakan di mesin sendiri.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARA PESAN -->
+  <section class="block tint" id="cara-pesan">
+    <div class="wrap">
+      <h2 class="reveal">Pesan dalam empat langkah.</h2>
+      <p class="lede reveal">Alur yang sama untuk order 12 pcs maupun 1.000 pcs, jadi tidak ada yang tercecer.</p>
+      <div class="steps">
+        <div class="step reveal"><div class="n">01</div><h3>Konsultasi</h3><p>Ceritakan kebutuhan, jumlah, dan deadline lewat WhatsApp atau form di bawah.</p></div>
+        <div class="step reveal"><div class="n">02</div><h3>Desain dan sampel</h3><p>Tim buatkan desain gratis. Setuju, kami jahit satu sampel untuk dicek.</p></div>
+        <div class="step reveal"><div class="n">03</div><h3>Produksi</h3><p>Potong, jahit, sablon atau bordir, semua dikerjakan di workshop Bandung.</p></div>
+        <div class="step reveal"><div class="n">04</div><h3>QC dan kirim</h3><p>Setiap pcs dicek jahitannya, lalu dikirim atau bisa diambil langsung.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HARGA -->
+  <section class="block" id="harga">
+    <div class="wrap">
+      <p class="eyebrow reveal">Harga transparan</p>
+      <h2 class="reveal">Tiga paket, tanpa biaya siluman.</h2>
+      <p class="lede reveal">Harga per pcs, minimal order 12 pcs. Bahan naik kelas tersedia di paket Reguler dan Premium.</p>
+      <!-- EDIT: harga dan isi paket di bawah dummy -->
+      <div class="tiers">
+        <article class="tier reveal">
+          <span class="t">HEMAT</span>
+          <div class="price">Rp75rb</div>
+          <div class="per">per pcs, min. 12 pcs</div>
+          <ul>
+            <li>Kaos cotton combed 30s</li>
+            <li>Sablon DTF satu titik</li>
+            <li>Gratis desain, 1x revisi</li>
+            <li>Estimasi 7 hari kerja</li>
+          </ul>
+          <a class="btn ghost" href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20pesan%20paket%20HEMAT." target="_blank" rel="noopener">Pesan via WhatsApp</a>
+        </article>
+        <article class="tier hot reveal">
+          <span class="t">REGULER, PALING LARIS</span>
+          <div class="price">Rp90rb</div>
+          <div class="per">per pcs, min. 12 pcs</div>
+          <ul>
+            <li>Kaos atau polo cotton 24s</li>
+            <li>Sablon atau bordir dada</li>
+            <li>Gratis desain, 3x revisi</li>
+            <li>Sampel jahitan sebelum produksi</li>
+            <li>Estimasi 5 hari kerja</li>
+          </ul>
+          <a class="btn" href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20pesan%20paket%20REGULER." target="_blank" rel="noopener" style="background:#fff;border-color:#fff;color:var(--ink)">Pesan via WhatsApp</a>
+        </article>
+        <article class="tier reveal">
+          <span class="t">PREMIUM</span>
+          <div class="price">Rp100rb</div>
+          <div class="per">per pcs, min. 12 pcs</div>
+          <ul>
+            <li>Jaket, hoodie, atau wearpack</li>
+            <li>Bordir komputer penuh</li>
+            <li>Gratis desain, revisi puas</li>
+            <li>QC per pcs plus packing satuan</li>
+          </ul>
+          <a class="btn ghost" href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20pesan%20paket%20PREMIUM." target="_blank" rel="noopener">Pesan via WhatsApp</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTOFOLIO -->
+  <section class="block tint" id="portofolio">
+    <div class="wrap">
+      <h2 class="reveal">Hasil jahitan yang sudah dikirim.</h2>
+      <p class="lede reveal">Contoh order yang pernah kami kerjakan. Foto asli bisa menggantikan gambar contoh ini kapan saja.</p>
+      <!-- EDIT: ganti dengan foto hasil produksi asli -->
+      <div class="works">
+        <figure class="w1 reveal"><img src="https://picsum.photos/seed/jagoan-seragam-sekolah/1200/800" alt="Seragam sekolah hasil produksi" width="1200" height="800" loading="lazy"><figcaption>Seragam angkatan SMK, 240 pcs</figcaption></figure>
+        <figure class="w2 reveal"><img src="https://picsum.photos/seed/jagoan-jaket/900/800" alt="Jaket komunitas hasil produksi" width="900" height="800" loading="lazy"><figcaption>Jaket komunitas lari, 60 pcs</figcaption></figure>
+        <figure class="w3 reveal"><img src="https://picsum.photos/seed/jagoan-polo/800/700" alt="Polo kantor hasil produksi" width="800" height="700" loading="lazy"><figcaption>Polo kantor startup, 36 pcs</figcaption></figure>
+        <figure class="w4 reveal"><img src="https://picsum.photos/seed/jagoan-wearpack/800/700" alt="Wearpack proyek hasil produksi" width="800" height="700" loading="lazy"><figcaption>Wearpack kontraktor, 120 pcs</figcaption></figure>
+        <figure class="w5 reveal"><img src="https://picsum.photos/seed/jagoan-kaos-event/800/700" alt="Kaos event hasil produksi" width="800" height="700" loading="lazy"><figcaption>Kaos event kampus, 500 pcs</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONI -->
+  <section class="block" id="testimoni">
+    <div class="wrap">
+      <h2 class="reveal">Kata mereka yang sudah pesan.</h2>
+      <div class="quotes">
+        <blockquote class="reveal">
+          <p>Jahitannya rapi, sablonnya tidak pecah dicuci berkali-kali. Datang dua hari lebih cepat.</p>
+          <cite>Bu Ratna, SMK di Bandung (dummy)</cite>
+        </blockquote>
+        <blockquote class="reveal">
+          <p>Revisi desain dilayani sabar sampai cocok. Harga final sama persis dengan penawaran awal.</p>
+          <cite>Kang Deden, komunitas lari (dummy)</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block tint" id="faq">
+    <div class="wrap">
+      <h2 class="reveal">Pertanyaan yang sering masuk.</h2>
+      <div class="faq">
+        <details class="reveal"><summary>Berapa minimal order?</summary><p>Minimal 12 pcs per model. Di bawah itu, bordir satuan tetap bisa dikerjakan, tanya dulu lewat WhatsApp.</p></details>
+        <details class="reveal"><summary>Berapa lama produksinya?</summary><p>Rata-rata 5 sampai 7 hari kerja setelah sampel disetujui. Order di atas 500 pcs atau saat antrean padat bisa 10 sampai 14 hari, selalu dikonfirmasi di awal.</p></details>
+        <details class="reveal"><summary>Apakah desain gratis?</summary><p>Ya. Semua paket termasuk jasa desain dan revisi sesuai ketentuan paket. File desain final boleh diminta.</p></details>
+        <details class="reveal"><summary>Bisa kirim ke luar Bandung?</summary><p>Bisa, via ekspedisi ke seluruh Indonesia. Ongkir dihitung terpisah sesuai berat dan tujuan.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAK -->
+  <section class="block" id="kontak">
+    <div class="wrap">
+      <h2 class="reveal">Ceritakan kebutuhan seragammu.</h2>
+      <p class="lede reveal">Isi form, pesananmu diteruskan ke WhatsApp kami. Balasan di jam kerja kurang dari satu jam.</p>
+      <div class="contact-grid">
+        <ul class="contact-list reveal">
+          <!-- EDIT: alamat, jam, kontak di bawah dummy -->
+          <li><span class="k">WORKSHOP</span>Jl. Kopo Cirangrang No. 88, Bandung 40225</li>
+          <li><span class="k">JAM BUKA</span>Senin sampai Sabtu, 08.00 - 17.00 WIB</li>
+          <li><span class="k">WHATSAPP</span><a href="https://wa.me/6281234567890" target="_blank" rel="noopener">0812-3456-7890</a></li>
+          <li><span class="k">INSTAGRAM</span><a href="https://instagram.com/jagoanseragam" target="_blank" rel="noopener">@jagoanseragam</a></li>
+        </ul>
+        <form class="order reveal" id="orderForm">
+          <div class="field">
+            <label for="fNama">Nama</label>
+            <input id="fNama" name="nama" type="text" placeholder="Nama kamu atau instansi" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="fJenis">Butuh apa?</label>
+            <select id="fJenis" name="jenis" required>
+              <option value="">Pilih jenis seragam</option>
+              <option>Kaos</option>
+              <option>Polo</option>
+              <option>Jaket / Hoodie</option>
+              <option>Seragam kerja / wearpack</option>
+              <option>Bordir / sablon satuan</option>
+            </select>
+            <span class="hint">Contoh: polo bordir untuk kantor 30 orang.</span>
+          </div>
+          <div class="field">
+            <label for="fJumlah">Jumlah (pcs)</label>
+            <input id="fJumlah" name="jumlah" type="number" min="1" placeholder="Contoh: 24" required inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="fCatatan">Catatan</label>
+            <textarea id="fCatatan" name="catatan" rows="3" placeholder="Deadline, ukuran, warna, atau link desain"></textarea>
+          </div>
+          <button class="btn" type="submit">Pesan via WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand">Jagoan <span>Seragam</span> Project</p>
+        <p style="margin-top:12px;max-width:36ch">Konveksi seragam di Bandung untuk sekolah, kantor, dan komunitas. Rapi, tepat waktu, tanpa drama.</p>
+      </div>
+      <div>
+        <p class="mono" style="font-size:11px;letter-spacing:.2em;color:#8f8c83">JELAJAH</p>
+        <ul>
+          <li><a href="#layanan">Layanan</a></li>
+          <li><a href="#harga">Harga</a></li>
+          <li><a href="#portofolio">Portofolio</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="mono" style="font-size:11px;letter-spacing:.2em;color:#8f8c83">HUBUNGI</p>
+        <ul>
+          <li>Jl. Kopo Cirangrang No. 88, Bandung</li>
+          <li><a href="https://wa.me/6281234567890" target="_blank" rel="noopener">0812-3456-7890</a></li>
+          <li><a href="https://instagram.com/jagoanseragam" target="_blank" rel="noopener">@jagoanseragam</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© <span id="year">2026</span> Jagoan Seragam Project, Bandung.</span>
+      <span>Harga dan stok contoh, hubungi kami untuk penawaran final.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tahun otomatis
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Menu mobile
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    toggle.textContent = open ? 'TUTUP' : 'MENU';
+  });
+  links.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { links.classList.remove('open'); toggle.textContent = 'MENU'; }
+  });
+
+  // Duplikasi isi tape agar loop mulus (satu marquee per halaman)
+  var tape = document.getElementById('tapeTrack');
+  tape.innerHTML += tape.innerHTML;
+
+  // Reveal saat masuk viewport (IntersectionObserver, bukan scroll listener)
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  // Counter statistik
+  var counters = document.querySelectorAll('[data-count]');
+  function runCount(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    if (reduced) { el.textContent = target; return; }
+    var start = null, dur = 1100;
+    function tick(t) {
+      if (!start) start = t;
+      var p = Math.min((t - start) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  if ('IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { runCount(en.target); cio.unobserve(en.target); }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function (el) { cio.observe(el); });
+  } else {
+    counters.forEach(runCount);
+  }
+
+  // Form diteruskan ke WhatsApp. EDIT: ganti nomor di bawah dengan nomor usaha.
+  var WA_NUMBER = '6281234567890';
+  document.getElementById('orderForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nama = document.getElementById('fNama').value.trim();
+    var jenis = document.getElementById('fJenis').value;
+    var jumlah = document.getElementById('fJumlah').value;
+    var catatan = document.getElementById('fCatatan').value.trim();
+    var text = 'Halo Jagoan Seragam, saya ' + nama + '. Mau pesan ' + jenis + ' sebanyak ' + jumlah + ' pcs.'
+      + (catatan ? ' Catatan: ' + catatan : '');
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  });
+</script>
+</body>
+</html>
